@@ -13,6 +13,20 @@ export const mockUserDetailsData = {
     publicRepositoriesCount: 3,
     createdAt: 1723002473,
     contributionsCount: 100,
+    badges: [
+      {
+        name: 'OWASP Staff',
+        description: 'Official OWASP Staff member',
+        cssClass: 'fa-user-shield',
+        weight: 100,
+      },
+      {
+        name: 'Project Leader',
+        description: 'Leader of an OWASP project',
+        cssClass: 'fa-star',
+        weight: 80,
+      },
+    ],
   },
   recentIssues: [
     {

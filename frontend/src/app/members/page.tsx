@@ -3,6 +3,7 @@ import { useSearchPage } from 'hooks/useSearchPage'
 import { useRouter } from 'next/navigation'
 import FontAwesomeIconWrapper from 'wrappers/FontAwesomeIconWrapper'
 import type { User } from 'types/user'
+import { DEMO_BADGES } from 'utils/demoBadges'
 import SearchPageLayout from 'components/SearchPageLayout'
 import UserCard from 'components/UserCard'
 
@@ -34,9 +35,13 @@ const UsersPage = () => {
       onclick: () => handleButtonClick(user),
     }
 
+    // Frontend-only: add a demo badgesCount for UI testing
+    const badgesCount = user.badgesCount ?? DEMO_BADGES.length
+
     return (
       <UserCard
         avatar={user.avatarUrl}
+        badges={badgesCount}
         button={submitButton}
         className="h-64 w-80 bg-white p-6 text-left shadow-lg transition-transform duration-500 hover:scale-105 hover:shadow-xl dark:bg-gray-800 dark:shadow-gray-900/30"
         company={user.company || ''}

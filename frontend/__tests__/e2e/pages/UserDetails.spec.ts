@@ -64,4 +64,18 @@ test.describe('User Details Page', () => {
     await expect(page.getByRole('heading', { name: 'Repositories' })).toBeVisible()
     await expect(page.getByText('test-repo-2')).toBeVisible()
   })
+
+  test('should display user badges in summary section', async ({ page }) => {
+    // Look for badges in the user summary section
+    await expect(page.locator('[data-testid="font-awesome-wrapper"][data-icon="fa-user-shield"]')).toBeVisible()
+    await expect(page.locator('[data-testid="font-awesome-wrapper"][data-icon="fa-star"]')).toBeVisible()
+  })
+
+  test('should show badge tooltips on hover', async ({ page }) => {
+    // Hover over a badge to check for tooltip
+    const staffBadge = page.locator('[data-testid="font-awesome-wrapper"][data-icon="fa-user-shield"]')
+    await staffBadge.hover()
+    await expect(page.getByText('OWASP Staff')).toBeVisible()
+    await expect(page.getByText('Official OWASP Staff member')).toBeVisible()
+  })
 })

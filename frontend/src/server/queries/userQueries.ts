@@ -6,6 +6,12 @@ export const GET_LEADER_DATA = gql`
       avatarUrl
       login
       name
+      badges {
+        name
+        description
+        cssClass
+        weight
+      }
     }
   }
 `
@@ -74,6 +80,12 @@ export const GET_USER_DATA = gql`
       releasesCount
       updatedAt
       url
+      badges {
+        name
+        description
+        cssClass
+        weight
+      }
     }
   }
 `

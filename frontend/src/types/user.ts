@@ -7,8 +7,17 @@ export type RepositoryDetails = {
   ownerKey: string
 }
 
+export type Badge = {
+  name: string
+  description: string
+  cssClass: string
+  weight: number
+}
+
 export type User<T = number> = {
   avatarUrl: string
+  badges?: Badge[]
+  badgesCount?: number // For Algolia search results
   bio?: string
   company?: string
   contributionsCount: number

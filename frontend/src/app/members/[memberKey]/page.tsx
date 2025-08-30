@@ -20,9 +20,11 @@ import type { PullRequest } from 'types/pullRequest'
 import type { Release } from 'types/release'
 import type { UserDetails } from 'types/user'
 import { formatDate } from 'utils/dateFormatter'
+import { DEMO_BADGES } from 'utils/demoBadges'
 import { drawContributions, fetchHeatmapData, HeatmapData } from 'utils/helpers/githubHeatmap'
 import DetailsCard from 'components/CardDetailsPage'
 import LoadingSpinner from 'components/LoadingSpinner'
+import UserBadges from 'components/UserBadges'
 
 const UserDetailsPage: React.FC = () => {
   const { memberKey } = useParams()
@@ -204,9 +206,16 @@ const UserDetailsPage: React.FC = () => {
         alt={user?.name || user?.login || 'User Avatar'}
       />
       <div className="w-full">
-        <Link href={user?.url || '#'} className="text-xl font-bold text-blue-400 hover:underline">
-          @{user?.login}
-        </Link>
+        <div className="flex items-center gap-2">
+          <Link href={user?.url || '#'} className="text-xl font-bold text-blue-400 hover:underline">
+            @{user?.login}
+          </Link>
+          {/* Frontend-only demo badges: show if no real badges present */}
+          {(() => {
+            const badgesToShow = user?.badges && user.badges.length > 0 ? user.badges : DEMO_BADGES
+            return <UserBadges badges={badgesToShow} size="sm" className="ml-2" />
+          })()}
+        </div>
         <p className="text-gray-600 dark:text-gray-400">{formattedBio}</p>
       </div>
     </div>

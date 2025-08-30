@@ -379,4 +379,43 @@ describe('UserCard', () => {
       expect(screen.getByText('5.7k')).toBeInTheDocument()
     })
   })
+
+  describe('Badge Functionality', () => {
+    it('renders badges count when greater than 0', () => {
+      render(<UserCard {...defaultProps} badges={3} />)
+
+      expect(screen.getByText('3')).toBeInTheDocument()
+      expect(screen.getByTestId('icon-medal')).toBeInTheDocument()
+    })
+
+    it('does not render badges count when 0', () => {
+      render(<UserCard {...defaultProps} badges={0} />)
+
+      expect(screen.queryByTestId('icon-medal')).not.toBeInTheDocument()
+    })
+
+    it('does not render badges count when undefined', () => {
+      render(<UserCard {...defaultProps} badges={undefined} />)
+
+      expect(screen.queryByTestId('icon-medal')).not.toBeInTheDocument()
+    })
+
+    it('formats large badge counts with millify', () => {
+      render(<UserCard {...defaultProps} badges={1500} />)
+
+      expect(screen.getByText('1.5k')).toBeInTheDocument()
+      expect(screen.getByTestId('icon-medal')).toBeInTheDocument()
+    })
+
+    it('renders badges count alongside followers and repositories', () => {
+      render(<UserCard {...defaultProps} followersCount={100} repositoriesCount={50} badges={5} />)
+
+      expect(screen.getByTestId('icon-users')).toBeInTheDocument()
+      expect(screen.getByTestId('icon-folder-open')).toBeInTheDocument()
+      expect(screen.getByTestId('icon-medal')).toBeInTheDocument()
+      expect(screen.getByText('100')).toBeInTheDocument()
+      expect(screen.getByText('50')).toBeInTheDocument()
+      expect(screen.getByText('5')).toBeInTheDocument()
+    })
+  })
 })

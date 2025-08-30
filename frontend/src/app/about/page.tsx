@@ -25,6 +25,7 @@ import type { Contributor } from 'types/contributor'
 import type { Project } from 'types/project'
 import type { User } from 'types/user'
 import { aboutText, technologies } from 'utils/aboutData'
+import { DEMO_BADGES } from 'utils/demoBadges'
 import AnchorTitle from 'components/AnchorTitle'
 import AnimatedCounter from 'components/AnimatedCounter'
 import LoadingSpinner from 'components/LoadingSpinner'
@@ -268,6 +269,7 @@ const LeaderData = ({ username }: { username: string }) => {
   return (
     <UserCard
       avatar={user.avatarUrl}
+      badges={(user.badges?.length ?? 0) || DEMO_BADGES.length}
       button={{
         icon: <FontAwesomeIconWrapper icon="fa-solid fa-right-to-bracket" />,
         label: 'View Profile',
